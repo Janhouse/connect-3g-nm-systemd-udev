@@ -1,0 +1,2 @@
+# Automatically connect to 3G network
+ACTION=="add", ATTR{idVendor}=="12d1", ATTR{idProduct}=="1506", TAG+="systemd", ENV{SYSTEMD_WANTS}="3g.service"
