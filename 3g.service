@@ -1,0 +1,14 @@
+[Unit]
+Description=3G modem script
+
+[Service]
+ExecStart=/usr/bin/3g-connect
+Type=oneshot
+TimeoutSec=0
+RemainAfterExit=no
+
+StandardOutput=syslog
+StandardError=syslog
+
+[Install]
+WantedBy=multi-user.target
