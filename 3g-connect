@@ -1,0 +1,45 @@
+#!/bin/bash
+
+echo "$(date) Executing $(basename "$0") script..."
+
+LOOP=true
+while $LOOP; do
+
+    if [ "1" = "$(nmcli dev status | grep -c gsm)" ]; then
+
+        echo "$(date) Modem found..."
+
+        if [ "1" == "$(nmcli dev status | grep gsm | grep -c disconnected)" ]; then
+
+            echo "$(date) Executing connect command..."
+
+            nmcli con up id LMT
+
+            if [ "0" == "$(nmcli dev status | grep gsm | grep -c disconnected)" ]; then
+                echo "$(date) Successfully connected"
+                LOOP=false
+            else
+                echo "$(date) Failed to connect"
+            fi
+
+        else
+            if [ "1" == "$(nmcli dev status | grep gsm | grep -c connecting)" ]; then
+                echo "$(date) Device is busy connecting"
+            else
+                echo "$(date) Device already connected"
+            fi
+            LOOP=false
+        fi
+
+    else
+        echo "$(date) Device not found by NetworkManager"
+    fi
+
+    if $LOOP; then
+        echo "$(date) Sleeping for 3 sec"
+        sleep 3s
+    fi
+
+done
+
+echo "$(date) Finished executing $(basename "$0") script"
