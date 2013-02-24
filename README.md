@@ -10,6 +10,6 @@ It makes udev start systemd 3g.service, that executes 3g-connect script.
 
 3g-connect script connects to NetworkManager's LMT network.
 
-Put the .rules file in the udev rules folder (/etc/udev/rules.d/).
-Put the .service file in systemd system folder (/etc/systemd/system/).
-Put the 3g-connect script in /usr/bin/ folder.
+* Put the .rules file in the udev rules folder (/etc/udev/rules.d/).
+* Put the .service file in systemd system folder (/etc/systemd/system/).
+* Put the 3g-connect script in /usr/bin/ folder.
